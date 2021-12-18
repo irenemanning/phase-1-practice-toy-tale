@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   fetchToys()
 
-   function addToytoCollection(obj, key) {
+   function addToytoCollection(obj) {
       let toyCollection = document.getElementById('toy-collection')
       let toyCard = document.createElement('div')
       toyCard.className = 'card'
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
         likebuttons.parentElement.parentElement.querySelector('p').innerText= `${obj.likes} Likes`
         updateLikes(obj)
       })
-       
+    }  
       
   //update likes
    const updateLikes = (obj) => {
@@ -83,9 +83,13 @@ document.addEventListener("DOMContentLoaded", () => {
         })
      })
      .then(resp => resp.json())
-     .then(data => console.log(data))
+     .then(data => {
+       console.log(data)
+       data.forEach(obj => {
+         addToytoCollection(obj)
+       })
+
+     })
    }
-      
-  }
 
 });
